@@ -20,7 +20,7 @@ ruby '1.9.3'
 gem 'rails', '3.2.6'
 
 # gem 'devise', '2.1.0'
-# gem 'omniauth-facebook', '1.4.0'
+gem 'omniauth-facebook', '1.4.0'
 # gem 'omniauth-twitter'
 # gem 'koala'
 gem 'thin'
