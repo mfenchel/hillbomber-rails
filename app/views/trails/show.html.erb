@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @trail.title %>
+</p>
+
+<p>
+  <b>Creator:</b>
+  <%= @trail.creator %>
+</p>
+
+<p>
+  <b>S lat:</b>
+  <%= @trail.s_lat %>
+</p>
+
+<p>
+  <b>S long:</b>
+  <%= @trail.s_long %>
+</p>
+
+<p>
+  <b>E lat:</b>
+  <%= @trail.e_lat %>
+</p>
+
+<p>
+  <b>E long:</b>
+  <%= @trail.e_long %>
+</p>
+
+
+<%= link_to 'Edit', edit_trail_path(@trail) %> |
+<%= link_to 'Back', trails_path %>
