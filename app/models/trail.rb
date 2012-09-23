@@ -1,6 +1,8 @@
 class Trail < ActiveRecord::Base
   attr_accessible :id, :creator, :e_lat, :e_long, :s_lat, :s_long, :title, :difficulty
 
+  belongs_to :user
+  
   validates :s_lat, presence: true
   validates :s_long, presence: true
   validates :e_lat, presence: true

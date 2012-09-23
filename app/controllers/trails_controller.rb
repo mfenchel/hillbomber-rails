@@ -2,13 +2,20 @@ class TrailsController < ApplicationController
   # GET /trails
   # GET /trails.json
   respond_to :json
-  
-  def index
-    @trails = Trail.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @trails }
+  def index
+    @user = User.find_by_uid(params[:uid])
+    if @user.nil?
+      format.json { render json: "User was Nil", status: :unprocessable_entity }
+      return
+    else
+
+      @trails = Trail.all
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @trails }
+      end
     end
   end
 
@@ -42,15 +49,30 @@ class TrailsController < ApplicationController
   # POST /trails
   # POST /trails.json
   def create
-    @trail = Trail.new(params[:trail])
+    @user = User.find_by_uid(params[:uid])
+    if @user.nil?
+      format.json { render json: "User was Nil", status: :unprocessable_entity }
+    else
 
-    respond_to do |format|
-      if @trail.save
-        format.html { redirect_to @trail, notice: 'Trail was successfully created.' }
-        format.json { render json: @trail, status: :created, location: @trail }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @trail.errors, status: :unprocessable_entity }
+      @s_lat = params[:s_lat]
+      @s_long = params[:s_long]
+      @e_lat = params[:e_lat]
+      @e_long = params[:e_long]
+      
+      @title = params[:title]
+      @difficulty = params[:difficulty]
+
+      @trail = Trail.new(s_lat: @s_lat, s_long: @s_long, e_lat: @e_lat, e_long: @e_long,
+                          title: @title, difficulty: @difficulty, creator: @user.name, user_id: @user.id)
+
+      respond_to do |format|
+        if @trail.save
+          format.html { redirect_to @trail, notice: 'Trail was successfully created.' }
+          format.json { render json: @trail, status: :created }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @trail.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
