@@ -14,7 +14,7 @@ class Trail < ActiveRecord::Base
       :e_lat => self.e_lat,
       :e_long => self.e_long,
       :difficulty => self.difficulty,
-      :creator => self.creator unless self.creator.nil?
+      :creator => self.creator
   	}
   end
 
