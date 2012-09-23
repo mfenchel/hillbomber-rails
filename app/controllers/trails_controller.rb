@@ -1,6 +1,8 @@
 class TrailsController < ApplicationController
   # GET /trails
   # GET /trails.json
+  respond_to :json
+  
   def index
     @trails = Trail.all
 
